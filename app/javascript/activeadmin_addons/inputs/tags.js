@@ -12,6 +12,7 @@ var initializer = function() {
       var prefix = model + '_' + method;
       var isRelation = !!$(el).data('relation');
       var collection = $(el).data('collection');
+      var defaultSeparator = $(el).data('default-separator');
       var width = $(el).data('width');
       var selectOptions = {
         width: width,
@@ -39,7 +40,7 @@ var initializer = function() {
 
       function fillHiddenInput() {
         var hiddenInput = $('#' + prefix);
-        hiddenInput.val(getSelectedItems().join());
+        hiddenInput.val(getSelectedItems().join(defaultSeparator != null ? defaultSeparator : ','));
       }
 
       function onItemRemoved(event) {
@@ -68,6 +69,8 @@ var initializer = function() {
           fillHiddenInput();
         }
       }
+
+      fillHiddenInput();
     });
   }
 };
